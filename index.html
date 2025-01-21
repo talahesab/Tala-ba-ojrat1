@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاسبه قیمت طلا</title>
+</head>
+<body>
+    <h1>محاسبه قیمت طلا</h1>
+    <form id="goldForm">
+        <label for="goldPrice">قیمت طلا:</label>
+        <input type="number" id="goldPrice" step="0.01" required><br><br>
+        
+        <label for="laborCost">اجرت (درصد):</label>
+        <input type="number" id="laborCost" step="0.01" required><br><br>
+        
+        <label for="weight">وزن:</label>
+        <input type="number" id="weight" step="0.01" required><br><br>
+        
+        <button type="button" onclick="calculate()">محاسبه</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        function calculate() {
+            let goldPrice = parseFloat(document.getElementById('goldPrice').value);
+            let laborCost = parseFloat(document.getElementById('laborCost').value) / 100; // تبدیل درصد به عدد اعشاری
+            let weight = parseFloat(document.getElementById('weight').value);
+
+            // محاسبه a که حاصل ضرب قیمت طلا در (اجرت به عنوان درصد) و سپس ضرب در 1.07 است
+            let a = goldPrice * (1 + laborCost) * 1.07;
+            
+            let result = ((a - goldPrice) * 1.09 + goldPrice) * weight;
+
+            document.getElementById('result').innerText = `نتیجه: ${result.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
